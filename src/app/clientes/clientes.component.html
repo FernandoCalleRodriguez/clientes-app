@@ -1,0 +1,43 @@
+<detalle-cliente *ngIf="clienteSeleccionado.nombre != null"  [cliente] = "clienteSeleccionado"></detalle-cliente>
+
+<div class="card border-primary mb-3">
+  <div class="card-header">Clientes</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de clientes</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary" type="button" name="button" [routerLink] = "['/clientes/form']">Crear cliente</button>
+    </div>
+    <div class="alert alert-info" *ngIf="clientes.length==0" >
+      No hay registros en la BBDD
+    </div>
+<table class="table table-bordered table-striped text-primary " *ngIf="clientes.length>0" >
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>nombre</th>
+      <th>apellido</th>
+      <th>email</th>
+      <th>fecha</th>
+      <th>editar</th>
+      <th>eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cliente of clientes" >
+      <td><button class="btn btn-rounded btn-success" type="button" name="button" (click)="abrirModal(cliente)">{{cliente.id}}</button></td>
+      <td>{{cliente.nombre}}</td>
+      <td>{{cliente.apellido | uppercase}}</td>
+      <td>{{cliente.email}}</td>
+      <td>{{cliente.createAt | date:"EEEE dd, MMMM yyyy"}}</td>
+      <td>
+        <button type="button" name="button" [routerLink]="['/clientes/form',cliente.id]" class="btn-primary">Editar</button>
+      </td>
+      <td>
+        <button type="button" name="button" (click)= "delete(cliente)" class="btn-danger">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
+</div>
+</div>
