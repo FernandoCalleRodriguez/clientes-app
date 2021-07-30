@@ -15,7 +15,7 @@ export class DetalleComponent implements OnInit {
   @Input() public cliente: Cliente = new Cliente;
   public imagenSeleccionada: File = new File(["foo"], "foo.txt", {
   type: "text/plain",});
-  public: string = "Detalle del cliente:";
+  public titulo: string = "Detalle del cliente:";
   public progreso: number =0;
 
   constructor(private clienteService: ClienteService,
