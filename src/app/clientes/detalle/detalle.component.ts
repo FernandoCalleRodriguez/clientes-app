@@ -15,6 +15,7 @@ export class DetalleComponent implements OnInit {
   @Input() public cliente: Cliente = new Cliente;
   public imagenSeleccionada: File = new File(["foo"], "foo.txt", {
   type: "text/plain",});
+  public titulo: string = "Detalle del cliente:";
   public progreso: number =0;
 
   constructor(private clienteService: ClienteService,
@@ -49,6 +50,7 @@ export class DetalleComponent implements OnInit {
           }else if(event.type === HttpEventType.Response ){
             let response:any = event.body;
             this.cliente = response.cliente as Cliente;
+            this.modalService.notificarUpload.emit(this.cliente);
             Swal.fire("La foto se ha subido completamente!", `La foto se ha subido con éxito: ${this.cliente.foto}`, 'success')
 
           }
